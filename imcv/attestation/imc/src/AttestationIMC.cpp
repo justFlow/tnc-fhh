@@ -142,19 +142,25 @@ int AttestationIMC::processConfigLine(string configLine)
 void AttestationIMC::processCertificateLine(string line)
 {
 	unsigned int i;
-	if ((i = line.find_first_of(' ')) != std::string::npos) {
-		certificateFile = line.substr(i+1, line.length() - (i + 1));
-		LOG4CXX_INFO(logger, "Certificate File = " << certificateFile);
-	}
+	i = line.find_first_of(' ');
+
+	if (i == line.npos)
+		return;					/* no space found */
+
+	certificateFile = line.substr(i+1, line.length() - (i + 1));
+	LOG4CXX_INFO(logger, "Certificate File = " << certificateFile);
 }
 
 void AttestationIMC::processAikKeyLine(string line)
 {
 	unsigned int i;
-	if ((i = line.find_first_of(' ')) != std::string::npos) {
-		aikBlobFile = line.substr(i+1, line.length() - (i + 1));
-		LOG4CXX_INFO(logger, "AikBlob File = " << aikBlobFile);
-	}
+	i = line.find_first_of(' ');
+
+	if (i == line.npos)
+		return;					/* no space found */
+
+	aikBlobFile = line.substr(i+1, line.length() - (i + 1));
+	LOG4CXX_INFO(logger, "AikBlob File = " << aikBlobFile);
 }
 
 int AttestationIMC::loadX509Certificate(void)

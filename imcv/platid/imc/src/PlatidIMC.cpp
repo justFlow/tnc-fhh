@@ -166,7 +166,9 @@ int PlatidIMC::processConfigLine(string configLine)
 void PlatidIMC::processUseWksLine(string line)
 {
 	unsigned int i;
-	if ((i = line.find_first_of(' ')) != std::string::npos) {
+	i = line.find_first_of(' ');
+
+	if (i != line.npos) {
 		if (!line.compare(i+1, strlen("yes"), "yes")) {
 			LOG4CXX_DEBUG(logger, "Config file says we use the WKS");
 			useWksSrk = true;
@@ -179,7 +181,9 @@ void PlatidIMC::processUseWksLine(string line)
 void PlatidIMC::processPrivateKeyLine(string line)
 {
 	unsigned int i;
-	if ((i = line.find_first_of(' ')) != std::string::npos) {
+	i = line.find_first_of(' ');
+
+	if (i != line.npos) {
 		privateKeyFile = line.substr(i+1, line.length() - (i + 1));
 		LOG4CXX_INFO(logger, "Private Key File = " << privateKeyFile);
 	}
@@ -190,7 +194,9 @@ void PlatidIMC::processPrivateKeyLine(string line)
 void PlatidIMC::processCertificateFileLine(string line)
 {
 	unsigned int i;
-	if ((i = line.find_first_of(' ')) != std::string::npos) {
+	i = line.find_first_of(' ');
+
+	if (i != line.npos) {
 		certificateFile = line.substr(i + 1, line.length() - (i + 1));
 		LOG4CXX_INFO(logger, "Certificate File = " << certificateFile);
 	}

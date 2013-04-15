@@ -202,8 +202,7 @@ std::string XACMLHelper::getObligation(/*in*/ DOMDocument* response) {
 				return XercesString(obligationID->getValue()).toString();
 			}
 		}
-	}
-	
+	} 
 	return std::string("");
 }
 

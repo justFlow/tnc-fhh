@@ -48,7 +48,6 @@ TNCCSData::TNCCSData(TNC_BufferReference data, TNC_UInt32 dataLength) throw (std
 {
 	LOG4CXX_TRACE(logger, "Create a TNCCSData object. length: " << dataLength << " (" << this << ")");
 
-	if(data == NULL && dataLength != 0)
 	if ( !(data!=NULL && dataLength!= 0) )
 		throw std::invalid_argument(std::string("Data is NULL and/or length is 0"));
 
