@@ -56,7 +56,7 @@ AttestationIMVLibrary::~AttestationIMVLibrary()
 	}
 }
 
-AbstractIMV * AttestationIMVLibrary::createNewImvInstance(TNC_ConnectionID connid)
+tncfhh::iml::AbstractIMV * AttestationIMVLibrary::createNewImvInstance(TNC_ConnectionID connid)
 {
 	return new AttestationIMV(connid, this, policyManager);
 }

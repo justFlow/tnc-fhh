@@ -42,14 +42,13 @@ using namespace log4cxx;
 #include "AttestationIMVLibrary.h"
 
 /* our logger */
-static LoggerPtr
-logger(Logger::getLogger("IMUnit.AbstractIMUnit.AbstractIMV.AttestationIMV"));
+static LoggerPtr logger(Logger::getLogger("IMUnit.AbstractIMUnit.AbstractIMV.AttestationIMV"));
 
 
 AttestationIMV::AttestationIMV(TNC_ConnectionID conID,
 		AttestationIMVLibrary *imclib,
 		AttestationIMVPolicyManager *pm )
-	: AbstractIMV(conID, imclib)
+	: tncfhh::iml::AbstractIMV(conID, imclib)
 	, x509Cert(NULL)
 	, pKey(NULL)
 	, rsa(NULL)
