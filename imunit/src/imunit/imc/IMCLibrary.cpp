@@ -175,7 +175,10 @@ TNC_Result IMCLibrary::notifyConnectionChange(TNC_IMCID imcID, TNC_ConnectionID 
 
 					// save IMC
 					imcInstances[connectionID] = tmp;
-					imc = getImcInstances(connectionID);
+					/* why to search  in the global list*/
+					/* if the list is long, it can cause performance issues*/
+					//imc = getImcInstances(connectionID);
+					imc = tmp;
 				}
 				break;
 			case TNC_CONNECTION_STATE_DELETE:

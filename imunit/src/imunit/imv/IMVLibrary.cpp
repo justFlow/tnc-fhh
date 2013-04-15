@@ -187,7 +187,10 @@ TNC_Result IMVLibrary::notifyConnectionChange(TNC_IMVID imvID, TNC_ConnectionID 
 					if (!tmp) throw ResultException("createNewIMVInstance(..) return NULL", TNC_RESULT_FATAL);
 
 					imvInstances[connectionID] = tmp;
-					imv = getImvInstances(connectionID);
+					/* why to search  in the global list*/
+					/* if the list is long, it can cause performance issues*/
+					//imv = getImvInstances(connectionID);
+					imv=tmp;
 				}
 				break;
 				case TNC_CONNECTION_STATE_DELETE:
