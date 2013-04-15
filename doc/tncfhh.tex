@@ -837,7 +837,7 @@ e.g. TrouSerS since version 0.3.4 is needed.
 This version of attestationIMV does not support different policies (PCR values) per AR.
 To prevent replay attacks a random 20 byte nonce is also part of each PCR\_SELECTION.
 
-IMC configuration is located at \code{/etc/tnc/platidIMC.file} and contains a path to the 
+IMC configuration is located at \code{/etc/tnc/attestationimc.file} and contains a path to the 
 X509 certificate and its corresponding private-key (AIK).
 Currently, tools from \url{http://www.privacyca.com} are used
 to create AIKs. The code from \code{identity.c} creates a AIK
