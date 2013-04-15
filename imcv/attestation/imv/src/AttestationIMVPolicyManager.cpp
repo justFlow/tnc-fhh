@@ -61,7 +61,7 @@ void PcrEntry::stringToByteArray(const std::string &valueAsString)
 	// check if size matches SHA-1
 	if(valueAsString.size() != sha1SizeAsString)
 	{
-		LOG4CXX_WARN(logger, "PcrEntry valueAsString must be 40 characters long, but length is " << valueAsString.size());
+		//LOG4CXX_WARN(logger, "PcrEntry valueAsString must be 40 characters long, but length is " << valueAsString.size());
 		memset(value, 0, sha1SizeAsString/2);
 		index = 0;
 		this->valueAsString = "0000000000000000000000000000000000000000";
@@ -97,18 +97,18 @@ PcrEntry::~PcrEntry()
 
 AttestationIMVPolicyManager::AttestationIMVPolicyManager(const char *policyFile)
 {
-	LOG4CXX_TRACE(logger, "AttestationIMVPolicyManager()");
+	//LOG4CXX_TRACE(logger, "AttestationIMVPolicyManager()");
 	parsePolicy(policyFile);
 }
 
 AttestationIMVPolicyManager::~AttestationIMVPolicyManager()
 {
-	LOG4CXX_TRACE(logger, "~AttestationIMVPolicyManager");
+	//LOG4CXX_TRACE(logger, "~AttestationIMVPolicyManager");
 }
 
 void AttestationIMVPolicyManager::parsePolicy(const char * policyFile)
 {
-	LOG4CXX_DEBUG(logger, "Parsing policy file " << policyFile);
+	//LOG4CXX_DEBUG(logger, "Parsing policy file " << policyFile);
 
 	// clear old entries
 	this->pcrEntries.clear();
@@ -123,19 +123,19 @@ void AttestationIMVPolicyManager::parsePolicy(const char * policyFile)
 			parsePolicyLine(line);
 		}
 	} else {
-		LOG4CXX_WARN(logger, "Could not open file!");
+		//LOG4CXX_WARN(logger, "Could not open file!");
 	}
 	file.close();
 
 	for (unsigned int i = 0; i < this->knownAiks.size(); ++i) {
-		LOG4CXX_TRACE(logger, "AIK " << i << " " << knownAiks[i]);
+		//LOG4CXX_TRACE(logger, "AIK " << i << " " << knownAiks[i]);
 	}
 
 	for (unsigned int i = 0; i < this->pcrEntries.size(); ++i) {
-		LOG4CXX_DEBUG(logger, "pcr" << (unsigned int) pcrEntries[i].index << " " << pcrEntries[i].valueAsString);
+		//LOG4CXX_DEBUG(logger, "pcr" << (unsigned int) pcrEntries[i].index << " " << pcrEntries[i].valueAsString);
 	}
 
-	LOG4CXX_TRACE(logger, "quoteType = " << (quoteType == single ? "single" : "complete"));
+	//LOG4CXX_TRACE(logger, "quoteType = " << (quoteType == single ? "single" : "complete"));
 }
 
 void AttestationIMVPolicyManager::parsePolicyLine(std::string &line)
@@ -167,7 +167,7 @@ void AttestationIMVPolicyManager::parsePolicyLine(std::string &line)
 		parsePolicyLineQuoteType(line);
 	} else {
 		// an invalid line
-		LOG4CXX_WARN(logger, "Invalid policy line: " << line);
+		//LOG4CXX_WARN(logger, "Invalid policy line: " << line);
 	}
 }
 
@@ -189,7 +189,7 @@ void AttestationIMVPolicyManager::parsePolicyLinePcr(std::string &line)
 	pos = line.find_first_of('=');
 	// get pcr index
 	ss << line.substr(3, pos - 3);
-	LOG4CXX_DEBUG(logger, "ss = " << ss.str());
+	//LOG4CXX_DEBUG(logger, "ss = " << ss.str());
 	ss >> index;
 
 	// get hash value
@@ -214,7 +214,7 @@ void AttestationIMVPolicyManager::parsePolicyLineQuoteType(std::string &line)
 	} else if (!ss.str().compare("complete")){
 		quoteType = complete;
 	} else {
-		LOG4CXX_WARN(logger, "Invalid quoteType. Using 'complete' as default.");
+		//LOG4CXX_WARN(logger, "Invalid quoteType. Using 'complete' as default.");
 		quoteType = complete;
 	}
 }
@@ -222,7 +222,7 @@ void AttestationIMVPolicyManager::parsePolicyLineQuoteType(std::string &line)
 
 bool AttestationIMVPolicyManager::isAikKnown(std::string fingerprint)
 {
-	LOG4CXX_TRACE(logger, "isAikKnown()");
+	//LOG4CXX_TRACE(logger, "isAikKnown()");
 	std::vector<std::string>::iterator it;
 	it = find(this->knownAiks.begin(), this->knownAiks.end(), fingerprint);
 	return it == this->knownAiks.end() ? false : true;
@@ -230,13 +230,13 @@ bool AttestationIMVPolicyManager::isAikKnown(std::string fingerprint)
 
 QuoteType AttestationIMVPolicyManager::getQuoteType()
 {
-	LOG4CXX_TRACE(logger, "getQuoteType()");
+	//LOG4CXX_TRACE(logger, "getQuoteType()");
 	return this->quoteType;
 }
 
 std::vector<PcrEntry> AttestationIMVPolicyManager::getPcrEntries()
 {
-	LOG4CXX_TRACE(logger, "getPcrEntries()");
+	//LOG4CXX_TRACE(logger, "getPcrEntries()");
 	return this->pcrEntries;
 }
 

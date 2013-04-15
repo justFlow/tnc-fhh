@@ -33,15 +33,15 @@
 using namespace log4cxx;
 
 
-TNCFHH_IMVLIBRARY_INITIALIZE(AttestationIMVLibrary);
-
-
 static LoggerPtr
 logger(Logger::getLogger("IMUnit.IMUnitLibrary.IMVLibrary.AttestationIMVLibrary"));
+
+TNCFHH_IMVLIBRARY_INITIALIZE(AttestationIMVLibrary);
 
 
 AttestationIMVLibrary::AttestationIMVLibrary()
 {
+	LOG4CXX_DEBUG(logger, "AttestationIMVLibrary()");
 	this->imUnitLibraryName = "AttestationIMVLibrary";
 	this->addMessageType(TNC_VENDORID_FHH, TNC_SUBTYPE_FHH_ATTESTATION);
 	this->policyManager = new AttestationIMVPolicyManager(IMV_CONFIG);
