@@ -47,14 +47,14 @@ using namespace log4cxx;
 
 
 #include "attestationimcConfig.h"
+using namespace std;
 
 
-static LoggerPtr
-logger(Logger::getLogger("IMUnit.AbstractIMUnit.AbstractIMC.AttestationIMC"));
+static LoggerPtr logger(Logger::getLogger("IMUnit.AbstractIMUnit.AbstractIMC.AttestationIMC"));
 
 
 AttestationIMC::AttestationIMC(TNC_ConnectionID conID, AttestationIMCLibrary *imclib)
-	: AbstractIMC(conID, imclib)
+	: tncfhh::iml::AbstractIMC(conID, imclib)
 	, initialized(false)
 	, certificateSent(false)
 	, certificateLength(-1)

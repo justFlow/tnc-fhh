@@ -37,7 +37,7 @@ AttestationIMCLibrary::AttestationIMCLibrary()
 	this->addMessageType(TNC_VENDORID_FHH, TNC_SUBTYPE_FHH_ATTESTATION);
 }
 
-AbstractIMC *AttestationIMCLibrary::createNewImcInstance(TNC_ConnectionID conId)
+tncfhh::iml::AbstractIMC *AttestationIMCLibrary::createNewImcInstance(TNC_ConnectionID conId)
 {
 	return new AttestationIMC(conId, this);
 }
