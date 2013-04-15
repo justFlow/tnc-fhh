@@ -251,7 +251,7 @@ TNC_Result AttestationIMC::beginHandshake()
 
 	initialized = true;
 
-	tncc.sendMessage(certificate, certificateLength, TNC_MESSAGETYPE_FHH_ATTESTATION);
+	tncc.sendMessage(certificate, (TNC_UInt32)certificateLength, TNC_MESSAGETYPE_FHH_ATTESTATION);
 	certificateSent = true;
 	return TNC_RESULT_SUCCESS;
 }
@@ -362,7 +362,7 @@ int AttestationIMC::initTpmStuff() {
 	CHECK_TSS_RETURN(res, "Get_SRK_Policy", cleanup2);
 	res = Tspi_Policy_SetSecret(srkPolicy, TSS_SECRET_MODE_SHA1, 20, wks);
 	CHECK_TSS_RETURN(res, "Set_SRK_Secret", cleanup2);
-	res = Tspi_Context_LoadKeyByBlob(hContext, hSRK, aikBlobLength, aikBlob, &hAIK);
+	res = Tspi_Context_LoadKeyByBlob(hContext, hSRK, (TNC_UInt32)aikBlobLength, aikBlob, &hAIK);
 	CHECK_TSS_RETURN(res, "Load aik blob", cleanup3);
 	res = Tspi_Context_GetTpmObject(hContext, &hTPM);
 	CHECK_TSS_RETURN(res, "Get_TPM_Object", cleanup4);

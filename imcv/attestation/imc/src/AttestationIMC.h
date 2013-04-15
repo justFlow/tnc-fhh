@@ -92,11 +92,11 @@ private:
 	bool				certificateSent;
 
 	/* place to store the x509 certificate */
-	TNC_UInt32			certificateLength;
+	int				certificateLength;
 	TNC_BufferReference		certificate;
 
 	/* place to store the aik blob */
-	TNC_UInt32			aikBlobLength;
+	int				aikBlobLength;
 	TNC_BufferReference		aikBlob;
 
 	TNC_UInt32			signatureLength;
