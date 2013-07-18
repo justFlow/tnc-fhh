@@ -38,14 +38,13 @@ using namespace log4cxx;
 #include <iostream>
 
 /* our logger */
-static LoggerPtr
-logger(Logger::getLogger("IMUnit.AbstractIMUnit.AbstractIMV.PlatidIMV"));
+static LoggerPtr logger(Logger::getLogger("IMUnit.AbstractIMUnit.AbstractIMV.PlatidIMV"));
 
 
 PlatidIMV::PlatidIMV(TNC_ConnectionID conID,
 		PlatidIMVLibrary *imclib,
 		CertManager *cm )
-	: AbstractIMV(conID, imclib)
+	: tncfhh::iml::AbstractIMV(conID, imclib)
 	, x509Cert(NULL)
 	, pKey(NULL)
 	, rsa(NULL)

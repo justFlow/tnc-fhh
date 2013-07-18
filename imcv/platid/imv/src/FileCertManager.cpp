@@ -38,35 +38,35 @@ logger(Logger::getLogger("IMUnit.IMUnitLibrary.IMVLibrary.PlatidIMVLibrary.FileC
 
 FileCertManager::FileCertManager(const char *certfile)
 {
-	LOG4CXX_TRACE(logger, "FileCertManager()");
+	//LOG4CXX_TRACE(logger, "FileCertManager()");
 	loadCertsFromFile(certfile);
 }
 
 FileCertManager::~FileCertManager()
 {
-	LOG4CXX_TRACE(logger, "~FileCertManger");
+	//LOG4CXX_TRACE(logger, "~FileCertManger");
 }
 
 
 bool FileCertManager::isCertKnown(std::string dn, std::string fingerprint)
 {
-	LOG4CXX_TRACE(logger, "isCertKnown()");
-	LOG4CXX_DEBUG(logger, "dn = " << dn);
-	LOG4CXX_DEBUG(logger, "fp = " << fingerprint);
+	//LOG4CXX_TRACE(logger, "isCertKnown()");
+	//LOG4CXX_DEBUG(logger, "dn = " << dn);
+	//LOG4CXX_DEBUG(logger, "fp = " << fingerprint);
 
 	const map<string,string>::iterator it = certMap.find(dn);
 	if (it == certMap.end()) {
-		LOG4CXX_DEBUG(logger, "DN not registered");
+		//LOG4CXX_DEBUG(logger, "DN not registered");
 	} else {
-		LOG4CXX_DEBUG(logger, "Comparing fingerprints...");
-		LOG4CXX_DEBUG(logger, "fingerprint [file]  = " << (*it).second);
-		LOG4CXX_DEBUG(logger, "fingerprint [asked] = " << fingerprint);
+		//LOG4CXX_DEBUG(logger, "Comparing fingerprints...");
+		//LOG4CXX_DEBUG(logger, "fingerprint [file]  = " << (*it).second);
+		//LOG4CXX_DEBUG(logger, "fingerprint [asked] = " << fingerprint);
 
 		if (!(*it).second.compare(fingerprint)) {
-			LOG4CXX_DEBUG(logger, "Good fingerprint for this dn :-)");
+			//LOG4CXX_DEBUG(logger, "Good fingerprint for this dn :-)");
 			return true;
 		} else {
-			LOG4CXX_DEBUG(logger, "Wrong fingerprint for this dn :-(");
+			//LOG4CXX_DEBUG(logger, "Wrong fingerprint for this dn :-(");
 		}
 	}
 	return false;
@@ -76,10 +76,10 @@ bool FileCertManager::isCertKnown(std::string dn, std::string fingerprint)
 
 int FileCertManager::loadCertsFromFile(const char *certfile)
 {
-	LOG4CXX_INFO(logger, "Loading known certs from: " << certfile);
+	//LOG4CXX_INFO(logger, "Loading known certs from: " << certfile);
 	string line;
 
-	LOG4CXX_TRACE(logger, "Opening certificate file...");
+	//LOG4CXX_TRACE(logger, "Opening certificate file...");
 	ifstream certs(certfile);
 	if (certs.is_open()) {
 		while (!certs.eof()) {
@@ -87,10 +87,10 @@ int FileCertManager::loadCertsFromFile(const char *certfile)
 			addCertFromConfigLine(line);
 		}
 	} else {
-		LOG4CXX_ERROR(logger, "Could not open file!");
+		//LOG4CXX_ERROR(logger, "Could not open file!");
 		return -1;
 	}
-	LOG4CXX_INFO(logger, "Registered " << certMap.size() << " Certificates.");
+	//LOG4CXX_INFO(logger, "Registered " << certMap.size() << " Certificates.");
 	return 0;
 }
 
@@ -98,29 +98,29 @@ int FileCertManager::loadCertsFromFile(const char *certfile)
 
 int FileCertManager::addCertFromConfigLine(std::string line)
 {
-	LOG4CXX_TRACE(logger, "addCertFromConfigLine()");
+	//LOG4CXX_TRACE(logger, "addCertFromConfigLine()");
 
 	string dn, fp;
 	unsigned int i, j;
 
 	if (!(line.length() > 0)) {
-		LOG4CXX_TRACE(logger, "Empty line?");
+		//LOG4CXX_TRACE(logger, "Empty line?");
 		return 0;
 	}
 	if (line.at(0) == '#') {
-		LOG4CXX_TRACE(logger, "Found comment line");
+		//LOG4CXX_TRACE(logger, "Found comment line");
 		return 0;
 	}
 
 	i = line.find_first_of('"');
 	if (i == line.npos) {
-		LOG4CXX_WARN(logger, "Bad line! Could not find \"");
+		//LOG4CXX_WARN(logger, "Bad line! Could not find \"");
 		return -1;
 	}
 
 	j = line.find_first_of('"', i+1);
 	if (j == line.npos) {
-		LOG4CXX_WARN(logger, "Bad line! Could not find second \"");
+		//LOG4CXX_WARN(logger, "Bad line! Could not find second \"");
 		return -1;
 	}
 
@@ -129,8 +129,8 @@ int FileCertManager::addCertFromConfigLine(std::string line)
 	/* fingerprint should begin one space after the last "" */
 	fp = line.substr(j + 2, line.length());
 
-	LOG4CXX_TRACE(logger, "DN of line = " << dn);
-	LOG4CXX_TRACE(logger, "FP of line = " << fp);
+	//LOG4CXX_TRACE(logger, "DN of line = " << dn);
+	//LOG4CXX_TRACE(logger, "FP of line = " << fp);
 
 	certMap.insert(pair<string, string>(dn, fp));
 

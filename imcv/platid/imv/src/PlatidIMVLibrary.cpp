@@ -33,18 +33,16 @@
 #include <log4cxx/logger.h>
 using namespace log4cxx;
 
-
+static LoggerPtr
+logger(Logger::getLogger("IMUnit.IMUnitLibrary.IMVLibrary.PlatidIMVLibrary"));
 
 TNCFHH_IMVLIBRARY_INITIALIZE(PlatidIMVLibrary);
 
 
 
-static LoggerPtr
-logger(Logger::getLogger("IMUnit.IMUnitLibrary.IMVLibrary.PlatidIMVLibrary"));
-
-
 PlatidIMVLibrary::PlatidIMVLibrary()
 {
+	LOG4CXX_DEBUG(logger, "PlatidIMVLibrary()"); 
 	this->imUnitLibraryName = "PlatidIMVLibrary";
 	this->addMessageType(TNC_VENDORID_FHH, TNC_SUBTYPE_FHH_PLATID);
 	this->certManager = new FileCertManager(PLATIDIMV_KNOWN_CERTS_FILENAME);
@@ -61,7 +59,7 @@ PlatidIMVLibrary::~PlatidIMVLibrary()
 	}
 }
 
-AbstractIMV * PlatidIMVLibrary::createNewImvInstance(TNC_ConnectionID connid)
+tncfhh::iml::AbstractIMV * PlatidIMVLibrary::createNewImvInstance(TNC_ConnectionID connid)
 {
 	return new PlatidIMV(connid, this, certManager);
 }
